@@ -148,8 +148,6 @@ clean_ebc <-
       Address_matching == "P.O. Box 5001" &  `Prison Abbreviation` == "KVSP" ~ "P.O. Box 5101",
       Address_matching == "P.O. Box 4300" &  `Prison Abbreviation` == "LAC" ~ "P.O. Box 8457",
       is.na(Address_matching) &  `Prison Abbreviation` == "LAC" ~ "P.O. Box 8457",
-      `Prison Abbreviation` == "MSCP" ~ "P.O. Box 409099",
-      `Prison Abbreviation` == "MCSP" ~ "P.O. Box 409099",
       Address_matching == "P.O. Box 5101" &  `Prison Abbreviation` == "NKSP" ~ "P.O. Box 5000",
       Address_matching == "P.O. Box 5104" &  `Prison Abbreviation` == "NKSP" ~ "P.O. Box 5000",
       `Prison Abbreviation` == "RJD" ~ "480 Alta Rd.",
@@ -365,25 +363,26 @@ small_ebc <-
   head(20)
 
 # write this datatable to google sheets
-# write_sheet(clean_ebc, ss = "https://docs.google.com/spreadsheets/d/1j6iL0DnYdvrS8M9EJN3V772Eq1phmogLD1ZEWuxPtTs/edit#gid=0", sheet = "From Analysis 8-15")
+# write_sheet(clean_ebc, ss = "https://docs.google.com/spreadsheets/d/1j6iL0DnYdvrS8M9EJN3V772Eq1phmogLD1ZEWuxPtTs/edit#gid=0", sheet = "From Analysis 8-17")
 ```
 
 ## Identify prisons that are incorrectly labelled
 
 ``` r
+# 
 # prison_unlinked2 <-
-#   clean_ebc %>% 
-#   mutate(row_num = row_number()) %>% 
-#   dplyr::filter(is.na(`Prison Name`)) %>% 
+#   clean_ebc %>%
+#   mutate(row_num = row_number()) %>%
+#   dplyr::filter(is.na(`Prison Name`)) %>%
 #   dplyr::count(`Prison Abbreviation`, Address_matching) %>%
 #   arrange(`Prison Abbreviation`)
 # 
 # prison_unlinked <-
-#   clean_ebc %>% 
-#   mutate(row_num = row_number()) %>% 
-#   dplyr::filter(is.na(`Prison Name`)) %>% 
+#   clean_ebc %>%
+#   mutate(row_num = row_number()) %>%
+#   dplyr::filter(is.na(`Prison Name`)) %>%
 #   dplyr::distinct(`Prison Abbreviation`, Address_matching, .keep_all = TRUE) %>%
-#   dplyr::select(`Prison Abbreviation`, Address_matching, `Prison ID Number`) %>% 
+#   dplyr::select(`Prison Abbreviation`, Address_matching, `Prison ID Number`) %>%
 #   arrange(`Prison Abbreviation`)
 
 # write_sheet(prison_unlinked_2, ss = "https://docs.google.com/spreadsheets/d/1j6iL0DnYdvrS8M9EJN3V772Eq1phmogLD1ZEWuxPtTs/edit#gid=0", sheet = "Prison_PO_Box_fix")
